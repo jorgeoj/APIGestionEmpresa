@@ -78,7 +78,7 @@
 </head>
 <body>
 <h1>Lista de Actividades</h1>
-<table border="1">
+<table>
     <thead>
     <tr>
         <th>Nombre de la Actividad</th>
@@ -86,9 +86,9 @@
         <th>Tipo de Práctica</th>
         <th>Total de Horas</th>
         <th>Observaciones</th>
+        <th>Editar</th>
     </tr>
     </thead>
-    <tbody>
     <tr th:each="actividad: ${actividades}">
         <!-- <td>
             <a th:href=" '/edit/'+${actividad.getIdactividad()}" th:text="${actividad.getActividad()}"></a>
@@ -98,9 +98,19 @@
         <td th:text="${actividad.tipo}"></td>
         <td th:text="${actividad.horas}"></td>
         <td th:text="${actividad.observacion}"></td>
+        <td>
+            <form th:action="'/editar/'+${actividad.idactividad}" method="get">
+                <input type="hidden" name="idActividad" th:value="${actividad.idactividad}">
+                <input type="hidden" name="idAlumno" th:value="${idalumno}">
+                <input type="hidden" name="fecha" th:value="${#dates.format(actividad.fecha, 'yyyy-MM-dd')}">
+                <input type="hidden" name="tipo" th:value="${actividad.tipo}">
+                <input type="hidden" name="horas" th:value="${actividad.horas}">
+                <input type="hidden" name="actividad" th:value="${actividad.actividad}">
+                <input type="hidden" name="observacion" th:value="${actividad.observacion}">
+                <button type="submit">Editar</button>
+            </form>
+        </td>
     </tr>
-    </tbody>
-
 </table>
 <div class="button-container">
     <form th:action="'/new/'+${idalumno}" method="GET"><button type="submit">Añadir Actividad</button></form>

@@ -1,6 +1,7 @@
 package com.example.apigestionempresa.model;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -10,6 +11,8 @@ public class Actividad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idactividad;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date fecha;
     private String observacion;
     private Integer horas;
