@@ -7,6 +7,9 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que representa a una empresa.
+ */
 @Data
 @Entity
 @Table(name = "empresas")
@@ -20,6 +23,6 @@ public class Empresa {
     private String observaciones;
     private String nombre;
     @JsonIgnore
-    @OneToMany(mappedBy = "empresa",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "empresa", fetch = FetchType.EAGER)
     private List<Alumno> alumnos = new ArrayList<>();
 }

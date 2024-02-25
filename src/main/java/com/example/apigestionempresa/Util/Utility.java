@@ -2,7 +2,15 @@ package com.example.apigestionempresa.Util;
 
 import java.io.IOException;
 
+/**
+ * Clase de utilidad para funciones diversas.
+ */
 public class Utility {
+
+    /**
+     * Método para abrir automáticamente el navegador web con una URL específica.
+     * Selecciona el navegador según el Sistema Operativo.
+     */
     public static void launchWeb(){
         //Obtengo el nombre del Sistema Operativo
         String os = System.getProperty("os.name").toLowerCase();

@@ -7,6 +7,9 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que representa a un profesor.
+ */
 @Data
 @Entity
 @Table(name = "profesor")

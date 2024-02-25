@@ -18,6 +18,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador para manejar las operaciones relacionadas con los alumnos y sus actividades.
+ */
 @Controller
 @RequestMapping("/")
 public class AlumnoWebController {
@@ -26,12 +29,22 @@ public class AlumnoWebController {
     @Autowired
     private AlumnoRepository alumnoRepository;
 
+    /**
+     * Redirige a la página de inicio de sesión.
+     * @return La ruta de redirección hacia la página de inicio de sesión.
+     */
     @GetMapping("/")
     public String volverLogin(){
         return "redirect:/login";
     }
 
-    // TODO Comprobar si esta bien
+    /**
+     * Obtiene las actividades para un alumno específico y las muestra en la vista principal.
+     * @param idalumno ID del alumno.
+     * @param model Modelo para agregar atributos a la vista.
+     * @param request Objeto HttpServletRequest para acceder a la sesión.
+     * @return La vista principal del alumno si está autenticado, de lo contrario, la vista de inicio de sesión.
+     */
     @GetMapping("/{idalumno}")
     public String getActividadesByAlumno(@PathVariable Long idalumno, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -49,6 +62,17 @@ public class AlumnoWebController {
         }
     }
 
+    /**
+     * Maneja el envío del formulario para añadir una nueva actividad.
+     * @param idalumno ID del alumno.
+     * @param fecha Fecha de la actividad.
+     * @param horas Horas dedicadas a la actividad.
+     * @param tipo Tipo de actividad.
+     * @param actividad Descripción de la actividad.
+     * @param observacion Observaciones sobre la actividad.
+     * @param request Objeto HttpServletRequest para acceder a la sesión.
+     * @return Redirección a la página del alumno después de añadir la actividad si está autenticado, de lo contrario, la vista de inicio de sesión.
+     */
     @PostMapping("/new/{idalumno}")
     public String newActividad(@PathVariable Long idalumno, @RequestParam String fecha, @RequestParam Integer horas,
                                @RequestParam String tipo, @RequestParam String actividad,
@@ -100,6 +124,12 @@ public class AlumnoWebController {
         }
     }
 
+    /**
+     * Muestra el formulario para añadir una nueva actividad.
+     * @param model Modelo para agregar atributos a la vista.
+     * @param request Objeto HttpServletRequest para acceder a la sesión.
+     * @return La vista para añadir una nueva actividad si el alumno está autenticado, de lo contrario, la vista de inicio de sesión.
+     */
     @GetMapping("/new/{idalumno}")
     public String newActividad(Model model,HttpServletRequest request){
         HttpSession session=request.getSession();
@@ -115,7 +145,18 @@ public class AlumnoWebController {
         }
     }
 
-    // TODO Probar si funciona
+    /**
+     * Muestra el formulario para editar una actividad existente.
+     * @param idActividad ID de la actividad a editar.
+     * @param idAlumno ID del alumno asociado a la actividad.
+     * @param fecha Fecha de la actividad.
+     * @param tipo Tipo de actividad.
+     * @param horas Horas dedicadas a la actividad.
+     * @param actividad Descripción de la actividad.
+     * @param observacion Observaciones sobre la actividad.
+     * @param model Modelo para agregar atributos a la vista.
+     * @return La vista para editar la actividad.
+     */
     @GetMapping("/editar/{idActividad}")
     public String mostrarDetalleActividad(@PathVariable("idActividad") String idActividad,
                                           @RequestParam("idAlumno") Long idAlumno,
@@ -135,7 +176,17 @@ public class AlumnoWebController {
         return "actualizarActividad";
     }
 
-    // TODO Probar si funciona
+    /**
+     * Maneja la edición de una actividad existente.
+     * @param idActividad ID de la actividad a editar.
+     * @param fecha Fecha de la actividad.
+     * @param horas Horas dedicadas a la actividad.
+     * @param tipo Tipo de actividad.
+     * @param actividad Descripción de la actividad.
+     * @param observacion Observaciones sobre la actividad.
+     * @param request Objeto HttpServletRequest para acceder a la sesión.
+     * @return Redirección a la página del alumno después de editar la actividad si está autenticado, de lo contrario, la vista de inicio de sesión.
+     */
     @PostMapping("/editar/{idActividad}")
     public String editActivityPost(@PathVariable Long idActividad, @RequestParam String fecha, @RequestParam Integer horas,
                                    @RequestParam String tipo, @RequestParam String actividad, @RequestParam String observacion,
@@ -193,12 +244,24 @@ public class AlumnoWebController {
         }
     }
 
+    /**
+     * Muestra el formulario de inicio de sesión.
+     *
+     * @param modelo Modelo para la vista.
+     * @return Vista del formulario de inicio de sesión.
+     */
     @GetMapping("/login")
     public String getLogin(Model modelo){
         modelo.addAttribute("alumno",new Alumno());
         return "login";
     }
 
+    /**
+     * Maneja el proceso de inicio de sesión de un alumno.
+     * @param alumno Objeto Alumno con los datos del alumno que intenta iniciar sesión.
+     * @param request Objeto HttpServletRequest para acceder a la sesión.
+     * @return Redirección a la página principal del alumno si el inicio de sesión es exitoso, de lo contrario, la vista de inicio de sesión.
+     */
     @PostMapping("/succesfull")
     public String getAlumno(@ModelAttribute Alumno alumno, HttpServletRequest request){
         Boolean existencia = alumnoRepository.existsAlumnoByEmail(alumno.getEmail());
@@ -217,7 +280,12 @@ public class AlumnoWebController {
         }
     }
 
-    // TODO Probar si funciona
+    /**
+     * Elimina una actividad específica.
+     * @param idActividad ID de la actividad a eliminar.
+     * @param request Objeto HttpServletRequest para acceder a la sesión.
+     * @return Redirección a la página del alumno después de eliminar la actividad si está autenticado, de lo contrario, la vista de inicio de sesión.
+     */
     @PostMapping("/borrarActividad/{idActividad}")
     public String eliminaActividad(@PathVariable Long idActividad, HttpServletRequest request) {
         // Obtén la sesión actual del usuario
@@ -241,7 +309,12 @@ public class AlumnoWebController {
             return "login";
         }
     }
-
+    /**
+     * Cierra la sesión del usuario actual.
+     * @param model Modelo para agregar atributos a la vista.
+     * @param request Objeto HttpServletRequest para acceder a la sesión.
+     * @return La vista de inicio de sesión.
+     */
     @GetMapping("logout")
     public String logout(Model model, HttpServletRequest request)  {
         HttpSession session = request.getSession();

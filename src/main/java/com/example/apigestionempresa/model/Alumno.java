@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Clase que representa a un alumno.
+ */
 @Data
 @Entity
 @Table(name = "alumno")
