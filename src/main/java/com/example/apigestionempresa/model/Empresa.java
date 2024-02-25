@@ -1,4 +1,4 @@
-package com.example.apigestionpracticasempresa.model;
+package com.example.apigestionempresa.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

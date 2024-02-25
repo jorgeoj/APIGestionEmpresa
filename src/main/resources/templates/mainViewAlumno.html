@@ -90,13 +90,14 @@
     </thead>
     <tbody>
     <tr th:each="actividad: ${actividades}">
-        <td>
+        <!-- <td>
             <a th:href=" '/edit/'+${actividad.getIdactividad()}" th:text="${actividad.getActividad()}"></a>
-        </td>
-        <td th:text="${actividad.getFecha()}"></td>
-        <td th:text="${actividad.getTipo()}"></td>
-        <td th:text="${actividad.getHoras()}"></td>
-        <td th:text="${actividad.getObservacion()}"></td>
+        </td> -->
+        <td th:text="${actividad.actividad}"></td>
+        <td th:text="${actividad.fecha}"></td>
+        <td th:text="${actividad.tipo}"></td>
+        <td th:text="${actividad.horas}"></td>
+        <td th:text="${actividad.observacion}"></td>
     </tr>
     </tbody>
 

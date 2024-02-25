@@ -1,7 +1,6 @@
-package com.example.apigestionpracticasempresa.model;
+package com.example.apigestionempresa.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.util.Date;
 

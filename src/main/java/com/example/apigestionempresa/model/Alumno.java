@@ -1,10 +1,9 @@
-package com.example.apigestionpracticasempresa.model;
+package com.example.apigestionempresa.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

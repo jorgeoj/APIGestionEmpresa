@@ -1,4 +1,4 @@
-package com.example.apigestionpracticasempresa.Util;
+package com.example.apigestionempresa.Util;
 
 import java.io.IOException;
 

@@ -1,9 +1,9 @@
-package com.example.apigestionpracticasempresa.controllers;
+package com.example.apigestionempresa.controllers;
 
-import com.example.apigestionpracticasempresa.model.Actividad;
-import com.example.apigestionpracticasempresa.model.Alumno;
-import com.example.apigestionpracticasempresa.repositories.ActividadRepository;
-import com.example.apigestionpracticasempresa.repositories.AlumnoRepository;
+import com.example.apigestionempresa.model.Actividad;
+import com.example.apigestionempresa.model.Alumno;
+import com.example.apigestionempresa.repositories.ActividadRepository;
+import com.example.apigestionempresa.repositories.AlumnoRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Controller
 @RequestMapping("/")
@@ -40,9 +45,10 @@ public class AlumnoWebController {
         Alumno alumnoSession = (Alumno) session.getAttribute("alumno");
 
         if(alumnoSession!=null){
-            Alumno alumno2 = alumnoSession;
-            model.addAttribute("actividades",actividadRepository.getAllByAlumno(alumno2));
-            System.out.println(actividadRepository.getAllByAlumno(alumno2));
+            Alumno alumno = alumnoSession;
+            List<Actividad> actividades = actividadRepository.getAllByAlumno(alumno);
+            model.addAttribute("actividades",actividades);
+            model.addAttribute("alumno", alumno);
             return "mainViewAlumno";
         }else{
             model.addAttribute("alumno",new Alumno());
@@ -51,8 +57,10 @@ public class AlumnoWebController {
     }
 
     // TODO Probar si funciona
+    private static final Logger logger = LoggerFactory.getLogger(AlumnoWebController.class);
+
     @PostMapping("/new/{idalumno}")
-    public String newActividad(@PathVariable Long idAlumno, @RequestParam String fecha, @RequestParam Integer horas, @RequestParam String tipo, @RequestParam String actividad,
+    public String newActividad(@PathVariable Long idalumno, @RequestParam String fecha, @RequestParam Integer horas, @RequestParam String tipo, @RequestParam String actividad,
                                      @RequestParam String observacion, HttpServletRequest request) {
 
         // Obtiene la sesión actual del usuario
@@ -74,7 +82,7 @@ public class AlumnoWebController {
                     // Maneja la excepción en caso de error al analizar la fecha
                     e.printStackTrace();
                     // Redirige de vuelta a la página de añadir actividad si hay un error en la fecha
-                    return "redirect:/new/" + idAlumno;
+                    return "redirect:/new/" + idalumno;
                 }
 
                 // Crea un nuevo objeto de actividad y establece sus atributos
@@ -90,10 +98,10 @@ public class AlumnoWebController {
                 actividadRepository.save(nuevaActividad);
 
                 // Redirige a la página del alumno después de guardar la actividad
-                return "redirect:/" + idAlumno;
+                return "redirect:/" + idalumno;
             } else {
                 // Redirige de vuelta a la página de añadir actividad si faltan datos
-                return "redirect:/new/" + idAlumno;
+                return "redirect:/new/" + idalumno;
             }
         } else {
             // Si no hay un alumno en sesión, redirige a la página de inicio de sesión

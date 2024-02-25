@@ -1,6 +1,6 @@
-package com.example.apigestionpracticasempresa.repositories;
+package com.example.apigestionempresa.repositories;
 
-import com.example.apigestionpracticasempresa.model.Alumno;
+import com.example.apigestionempresa.model.Alumno;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
