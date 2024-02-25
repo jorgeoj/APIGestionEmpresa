@@ -79,7 +79,7 @@
     <input type="text" th:value="${actividad}" name="actividad" required>
 
     <h2 class="AzulCESUR">Fecha</h2>
-    <input type="date" th:value="${fecha}" name="fecha" required>
+    <input type="date" th:value="${#dates.format(fecha, 'yyyy-MM-dd')}" name="fecha" required>
 
     <h2 class="AzulCESUR">Tipo de Práctica</h2>
     <input type="text" th:value="${tipo}" name="tipo" required>
