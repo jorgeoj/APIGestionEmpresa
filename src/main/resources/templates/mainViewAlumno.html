@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <title>Lista Actividades</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 20px;
+            background-color: #b1dbff;
+        }
+
+        h1 {
+            text-align: center;
+            color: #002858;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            color: #002858;
+        }
+
+        th {
+            background-color: rgb(248, 248, 248, 0.8);
+        }
+
+        tr {
+            background-color: rgb(248, 248, 248, 0.8);
+        }
+
+        a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+
+        .button-container {
+            text-align: center; /* Centra los botones */
+            margin-top: 20px; /* Ajusta según sea necesario */
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 12px 20px; /* Ajusta el padding para hacer el botón más grande */
+            border-radius: 10px; /* Ajusta el radio para hacer el botón más redondeado */
+            background-color: #F5C22F; /* Ajusta el color de fondo según tu preferencia */
+            color: #002858;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold; /* Hace que el texto sea negrita */
+        }
+
+        button a {
+            text-decoration: none;
+            color: #002858;
+            font-weight: bold; /* Hace que el texto sea negrita */
+        }
+
+        button a:visited {
+            color: #002858;
+            font-weight: bold; /* Hace que el texto sea negrita */
+        }
+    </style>
+</head>
+<body>
+<h1>Lista de Actividades</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Nombre de la Actividad</th>
+        <th>Fecha</th>
+        <th>Tipo de Práctica</th>
+        <th>Total de Horas</th>
+        <th>Observaciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="actividad: ${actividades}">
+        <td>
+            <a th:href=" '/edit/'+${actividad.getIdactividad()}" th:text="${actividad.getActividad()}"></a>
+        </td>
+        <td th:text="${actividad.getFecha()}"></td>
+        <td th:text="${actividad.getTipo()}"></td>
+        <td th:text="${actividad.getHoras()}"></td>
+        <td th:text="${actividad.getObservacion()}"></td>
+    </tr>
+    </tbody>
+
+</table>
+<div class="button-container">
+    <form th:action="'/new/'+${idalumno}" method="GET"><button type="submit">Añadir Actividad</button></form>
+    <button><a href="/logout">Cerrar Sesión</a></button>
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #002858;
+            margin-bottom: 20px;
+        }
+
+        #AmarilloCESUR {
+            color: #F5C22F;
+        }
+
+        .AzulCESUR {
+            color: #002858;
+            text-align: left;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #002858;
+            color: #F5C22F;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #002840;
+        }
+    </style>
+</head>
+
+<body>
+<h1 id="AmarilloCESUR">CESUR FORMACIÓN</h1>
+<form action="/succesfull" method="POST">
+    <h2 class="AzulCESUR">Email</h2>
+    <input type="text" th:value="${alumno.email}" name="email" required>
+
+    <h2 class="AzulCESUR">Contraseña</h2>
+    <input type="password" th:value="${alumno.contrasenya}" name="contrasenya" required>
+
+    <button type="submit">Entrar</button>
+</form>
+</body>
+
+</html>
